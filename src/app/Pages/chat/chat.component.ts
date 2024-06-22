@@ -19,8 +19,7 @@ export class ChatComponent {
 
   constructor(private route: ActivatedRoute, private chatService: ChatService) {
     this.room = this.route.snapshot.paramMap.get('room');
-    this.pseudo = sessionStorage.getItem('pseudo');
-  }
+    this.pseudo = sessionStorage.getItem('pseudo') || 'Anonymous';  }
   ngOnInit() {
     this.chatService.receiveMessages().subscribe((message: string) => {
       this.messages.push(message);
@@ -30,6 +29,7 @@ export class ChatComponent {
   sendMessage() {
     if (this.message.trim()) {
       this.chatService.sendMessage(this.pseudo, this.room, this.message);
+      console.log(this.pseudo)
       this.message = '';
     }
   }

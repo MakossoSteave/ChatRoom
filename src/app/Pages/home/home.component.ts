@@ -23,6 +23,7 @@ export class HomeComponent {
   constructor(private router: Router, private chatService: ChatService) { }
 
   onSubmit() {
+    sessionStorage.setItem('pseudo', this.formData.pseudo); 
     this.chatService.joinRoom(this.formData.pseudo, this.formData.room);
     this.router.navigate(['/chat', this.formData.room]);
   }
